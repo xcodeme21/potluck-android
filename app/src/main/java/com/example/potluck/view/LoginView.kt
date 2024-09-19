@@ -1,5 +1,6 @@
 package com.example.potluck.view
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
@@ -14,7 +15,9 @@ import com.example.potluck.ui.components.ButtonStyle
 import com.example.potluck.viewmodel.LoginViewModel
 
 @Composable
-fun LoginView(viewModel: LoginViewModel = LoginViewModel(), modifier: Modifier = Modifier ) {
+fun LoginView(modifier: Modifier = Modifier) {
+    val viewModel: LoginViewModel = remember { LoginViewModel() }
+
     val isFormValid = viewModel.isFormValid()
 
     Column(
@@ -35,7 +38,10 @@ fun LoginView(viewModel: LoginViewModel = LoginViewModel(), modifier: Modifier =
 
         TextField(
             value = viewModel.email,
-            onValueChange = { viewModel.email = it },
+            onValueChange = {
+                viewModel.email = it
+                Log.d("LoginView", "Email changed: $it")
+            },
             label = { Text("Email") },
             modifier = Modifier.fillMaxWidth()
         )
@@ -44,7 +50,10 @@ fun LoginView(viewModel: LoginViewModel = LoginViewModel(), modifier: Modifier =
 
         TextField(
             value = viewModel.password,
-            onValueChange = { viewModel.password = it },
+            onValueChange = {
+                viewModel.password = it
+                Log.d("LoginView", "password changed: $it")
+            },
             label = { Text("Password") },
             modifier = Modifier.fillMaxWidth()
         )
