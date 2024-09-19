@@ -15,9 +15,7 @@ import com.example.potluck.ui.components.ButtonStyle
 import com.example.potluck.viewmodel.LoginViewModel
 
 @Composable
-fun LoginView(modifier: Modifier = Modifier) {
-    val viewModel: LoginViewModel = remember { LoginViewModel() }
-
+fun LoginView(modifier: Modifier = Modifier, viewModel: LoginViewModel = remember { LoginViewModel() }) {
     val isFormValid = viewModel.isFormValid()
 
     Column(
