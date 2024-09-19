@@ -1,12 +1,14 @@
 package com.example.potluck.view
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.potluck.R
@@ -17,6 +19,14 @@ import com.example.potluck.viewmodel.LoginViewModel
 @Composable
 fun LoginView(modifier: Modifier = Modifier, viewModel: LoginViewModel = remember { LoginViewModel() }) {
     val isFormValid = viewModel.isFormValid()
+    val context = LocalContext.current
+
+    LaunchedEffect(viewModel.errorMessage) {
+        if (viewModel.errorMessage.isNotEmpty()) {
+            Toast.makeText(context, "Error: ${viewModel.errorMessage}", Toast.LENGTH_LONG).show()
+            viewModel.errorMessage = ""
+        }
+    }
 
     Column(
         modifier = modifier
@@ -66,8 +76,6 @@ fun LoginView(modifier: Modifier = Modifier, viewModel: LoginViewModel = remembe
 
         if (viewModel.isLoggedIn) {
             Text("Login Successful!")
-        } else if (viewModel.errorMessage.isNotEmpty()) {
-            Text("Error: ${viewModel.errorMessage}")
         }
     }
 }

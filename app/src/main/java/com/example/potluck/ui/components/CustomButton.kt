@@ -14,6 +14,7 @@ sealed class ButtonStyle(
 ) {
     object Primary : ButtonStyle(Color(0xFF0D6EFD), Color.White)
     object Info : ButtonStyle(Color(0xFF17A2B8), Color.White)
+    object Success : ButtonStyle(Color(0xFF388E3C), Color.White)
     object Danger : ButtonStyle(Color(0xFFDC3545), Color.White)
     object Default : ButtonStyle(Color(0xFF6C757D), Color.White)
     object Warning : ButtonStyle(Color(0xFFFFC107), Color.Black)
