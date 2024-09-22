@@ -62,6 +62,10 @@ dependencies {
     implementation(libs.androidx.espresso.core)
     implementation(libs.font.awesome)
     implementation(libs.firebase.firestore.ktx)
+
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

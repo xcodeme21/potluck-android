@@ -1,4 +1,3 @@
-// MainActivity.kt
 package com.example.potluck
 
 import android.os.Bundle
