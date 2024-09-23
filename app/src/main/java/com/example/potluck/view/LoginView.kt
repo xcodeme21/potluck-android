@@ -5,12 +5,21 @@ import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material3.Icon
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.example.potluck.HomeActivity
 import com.example.potluck.R
@@ -22,6 +31,7 @@ import com.example.potluck.viewmodel.LoginViewModel
 fun LoginView(modifier: Modifier = Modifier, viewModel: LoginViewModel = remember { LoginViewModel() }) {
     val isFormValid = viewModel.isFormValid()
     val context = LocalContext.current
+    var showPassword: Boolean by remember { mutableStateOf(false) }
 
     LaunchedEffect(viewModel.errorMessage) {
         if (viewModel.errorMessage.isNotEmpty()) {
@@ -71,6 +81,29 @@ fun LoginView(modifier: Modifier = Modifier, viewModel: LoginViewModel = remembe
                 viewModel.password = it
                 Log.d("LoginView", "password changed: $it")
             },
+            trailingIcon = {
+                if (showPassword) {
+                    IconButton(onClick = { showPassword = false }) {
+                        Icon(
+                            imageVector = Icons.Filled.VisibilityOff,
+                            contentDescription = "show_password"
+                        )
+                    }
+                } else {
+                    IconButton(
+                        onClick = { showPassword = true }) {
+                        Icon(
+                            imageVector = Icons.Filled.Visibility,
+                            contentDescription = "hide_password"
+                        )
+                    }
+                }
+            },
+
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Password
+            ),
+            visualTransformation = if (showPassword) VisualTransformation.None else PasswordVisualTransformation(),
             label = { Text("Password") },
             modifier = Modifier.fillMaxWidth()
         )
